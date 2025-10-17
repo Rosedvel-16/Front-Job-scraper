@@ -25,8 +25,9 @@ function App() {
     if (filters.fuente) params.append('fuente', filters.fuente);
 
     try {
-      // Esta línea usa la variable de entorno para producción o localhost para desarrollo
       const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+      // Aquí se construye la URL final usando la variable API_URL
       const response = await fetch(`${API_URL}/api/search?${params.toString()}`);
       
       if (!response.ok) {
