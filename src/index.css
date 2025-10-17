@@ -1,13 +1,243 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* --- Estilos Generales y Layout --- */
+:root {
+  --primary-color: #4a47a3;
+  --secondary-color: #706fd3;
+  --background-color: #f4f7f9;
+  --card-background: #ffffff;
+  --text-color: #333;
+  --text-light: #666;
+  --border-color: #e0e0e0;
+  --success-color: #27ae60;
+  --error-color: #e74c3c;
+  --font-family: 'Poppins', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.app-main {
+  display: flex;
+  flex-grow: 1;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.search-panel {
+  flex: 0 0 300px; /* Ancho fijo para el panel de filtros */
+}
+
+.results-panel {
+  flex-grow: 1;
+}
+
+/* --- Formulario de Búsqueda --- */
+.search-form {
+  background-color: var(--card-background);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 2rem;
+}
+
+.search-form h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(112, 111, 211, 0.2);
+}
+
+.search-form button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-form button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.search-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* --- Lista y Tarjetas de Empleo --- */
+.job-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.job-card {
+  background: var(--card-background);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-left: 5px solid var(--primary-color);
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.job-title {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--primary-color);
+}
+
+.job-company, .job-location, .job-salary {
+  margin: 0.5rem 0;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.job-date {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.apply-button {
+  background-color: var(--success-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.apply-button:hover {
+  background-color: #2ecc71;
+}
+
+.source-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  color: white;
+  margin-left: 1rem;
+}
+
+.source-ct { background-color: #007bff; }
+.source-bm { background-color: #ff9900; }
+
+/* --- Mensajes y Spinner --- */
+.message-container, .spinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background-color: var(--card-background);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+.error-message { color: var(--error-color); }
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--border-color);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Responsividad --- */
+@media (max-width: 768px) {
+  .app-main {
+    flex-direction: column;
+  }
+  .search-panel {
+    flex: 1;
+    position: static;
+  }
 }
