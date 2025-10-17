@@ -27,7 +27,6 @@ function App() {
     try {
       const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-      // Aquí se construye la URL final usando la variable API_URL
       const response = await fetch(`${API_URL}/api/search?${params.toString()}`);
       
       if (!response.ok) {
@@ -67,3 +66,4 @@ function App() {
 }
 
 export default App;
+
